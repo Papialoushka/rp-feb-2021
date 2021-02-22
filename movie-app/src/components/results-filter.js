@@ -1,11 +1,13 @@
+import React from 'react';
 const filterCriteria = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 const sortCriteria = ['Release Date', 'Rating'];
 
 function SortItems(props) {
   const sortCriteria = props.sortCriteria;
 
+  // TODO: use item.id as key.
   const sortItems = (
-    <ul className='sort-filter' role='listbox'>{sortCriteria.map((item, index) => <li key='index'
+    <ul className='sort-filter' role='listbox'>{sortCriteria.map((item, index) => <li key={index}
                                                                                       role='option'>{item}</li>)}</ul>
   )
 
@@ -19,9 +21,9 @@ function SortItems(props) {
 function FilterItems(props) {
   const filterCriteria = props.filterCriteria;
 
-
+  // TODO: use item.id as key.
   const filterItems = (
-    <ul className='results-filter' role='list'>{filterCriteria.map((item, index) => <li key='index'
+    <ul className='results-filter' role='list'>{filterCriteria.map((item, index) => <li key={index}
                                                                                         role='listitem'>{item}</li>)}</ul>
   );
 

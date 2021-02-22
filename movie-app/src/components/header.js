@@ -1,4 +1,5 @@
-import logo from './../logo.png';
+import React from 'react';
+import logo from './../assets/logo.png';
 import SearchForm from './search-form';
 import Button from './button';
 
