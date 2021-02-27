@@ -1,3 +1,4 @@
+import React from 'react';
 import ResultsFilter from './results-filter';
 import Greeting from './greeting';
 
