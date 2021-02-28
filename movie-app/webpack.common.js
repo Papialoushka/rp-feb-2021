@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -24,11 +25,15 @@ module.exports = {
       },
       favicon: './src/assets/favicon.ico',
     }),
+    new webpack.ProvidePlugin({
+      'React': 'react',
+      'PropTypes': 'prop-types',
+    })
   ],
   module: {
     rules: [
       {
-        test: /\.m?js|jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -39,10 +44,11 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(scss|css)$/,
         use: [
           'style-loader',
           'css-loader',
+          'sass-loader',
         ],
       },
       {

@@ -1,0 +1,28 @@
+@import 'Variables';
+
+.movies-list {
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  img,
+  .genre {
+    width: 100%;
+  }
+
+  .release-date {
+    width: auto;
+    height: min-content;
+    margin-top: 1em;
+    padding: 6px 20px;
+    border: 1px solid $tertiary-bg-color;
+    border-radius: 3px;
+    text-align: right;
+  }
+}

@@ -1,0 +1,14 @@
+@import 'Variables';
+
+input {
+  width: 77%;
+  height: $search-input-height;
+  padding: 0 2%;
+  border: none;
+  border-radius: $border-radius;
+  background-color: $dark-opacity-color;
+
+  &::placeholder {
+    font-size: 20px;
+  }
+}
