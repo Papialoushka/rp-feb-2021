@@ -1,0 +1,53 @@
+@import 'Variables';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border: none;
+  border-radius: $border-radius;
+
+  &.add-button {
+    position: absolute;
+    right: 4vw;
+    top: 2vh;
+    padding: 0.7em 1em;
+    background-color: $opacity-bg-color;
+    color: $main-interactive-color;
+    font-size: 20px;
+
+    &::before {
+      content: '+';
+      margin-right: 5px;
+    }
+  }
+
+  &.search-button {
+    width: 20%;
+    height: $search-input-height;
+    margin-left: 1vw;
+    padding: 0 2%;
+    background-color: $main-interactive-color;
+    color: $content-color;
+    font-size: 20px;
+
+    @media screen and (max-width: 500px) {
+      width: min-content;
+      margin-left: 2vw;
+    }
+  }
+
+  &.show-list-button {
+    margin-left: 2vw;
+    background-color: transparent;
+    color: $content-color;
+    font-size: 16px;
+
+    &::after {
+      content: '\25bc';
+      margin-left: 10px;
+      color: $main-interactive-color;
+    }
+  }
+}

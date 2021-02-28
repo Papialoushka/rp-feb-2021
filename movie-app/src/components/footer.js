@@ -1,14 +1,11 @@
-import React from 'react';
-import logo from './../assets/logo.png';
-
-const Footer = () => {
+const Footer = (props) => {
   return (
-    <footer className='footer'>
-      <div className='inner-wrapper'>
-        <img src={logo} alt='netflix logo' className='footer-logo'/>
-      </div>
-    </footer>
+    <footer className={props.className}>{props.children}</footer>
   )
 }
 
 export default Footer;
+
+Footer.propTypes = {
+  children: PropTypes.element.isRequired
+};

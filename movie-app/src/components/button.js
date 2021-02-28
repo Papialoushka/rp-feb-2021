@@ -1,16 +1,14 @@
-import React from 'react';
+import './../styles/Button.scss';
 
-class Button extends React.PureComponent {
-  constructor(props) {
-    super();
-    this.baseClass = 'button';
-  }
-
-  render() {
-    return (
-      <button className={`${this.baseClass} ${this.props.className}`}>{this.props.name}</button>
-    );
-  }
-}
+const Button = (props) => (<button className={`button ${props.className}`}>{props.name}</button>);
 
 export default Button;
+
+Button.propTypes = {
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+Button.defaultProps = {
+  name: 'Button',
+}

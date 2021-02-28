@@ -1,0 +1,78 @@
+@import 'styles/Variables.scss';
+
+html {
+  min-height: 100%;
+}
+
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inner-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 2vh 4vw;
+}
+
+.header-logo,
+.footer-logo {
+  width: 150px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.header {
+  min-height: 35vh;
+  border-bottom: 1vh solid $tertiary-bg-color;
+  background-color: $secondary-bg-color;
+  color: white;
+  font-size: calc(10px + 2vmin);
+}
+
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 3vw;
+}
+
+h1 {
+  width: 100%;
+  margin: 5vh 0 4vh;
+  padding: 0 3vw;
+  font-family: sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3vh;
+  padding: 2vh 4vw;
+  background-color: $secondary-bg-color;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+}

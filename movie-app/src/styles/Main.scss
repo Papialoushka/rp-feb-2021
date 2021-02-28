@@ -1,0 +1,77 @@
+@import 'Variables';
+
+.main-content {
+  background-color: $main-bg-color;
+  height: 100%;
+  padding: 0 4vw 2vh;
+
+  p,
+  li,
+  h2,
+  h3,
+  span {
+    color: $content-color;
+  }
+}
+
+.results-count {
+  width: 100%;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 3vw;
+  grid-row-gap: 40px;
+  width: 100%;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.results-filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 5px ridge $tertiary-bg-color;
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+
+  p {
+    color: $tertiary-bg-color;
+    text-transform: uppercase;
+  }
+}
+
+.filter-results {
+  flex-grow: 1;
+
+  ul {
+    @media screen and (max-width: 500px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  li {
+    &:not(:first-child) {
+      margin-left: 2vw;
+
+      @media screen and (max-width: 500px) {
+        margin-left: 5vw;
+      }
+    }
+  }
+
+  a {
+    text-transform: uppercase;
+  }
+}
+
+.sort-results {
+  display: none;
+  flex-direction: column;
+}

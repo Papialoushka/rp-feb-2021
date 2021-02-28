@@ -1,16 +1,17 @@
-import React from 'react';
-import ResultsFilter from './results-filter';
-import Greeting from './greeting';
+import './../styles/Main.scss';
 
-const Main = () => {
+const Main = (props) => {
   return (
     <main className='main-content'>
       <div className='inner-wrapper'>
-        <ResultsFilter />
-        <Greeting />
+        {props.children}
       </div>
     </main>
   )
 }
 
 export default Main;
+
+Main.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+};
