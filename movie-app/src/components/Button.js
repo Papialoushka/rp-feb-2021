@@ -1,6 +1,7 @@
 import './../styles/Button.scss';
 
-const Button = (props) => (<button className={`button ${props.className}`}>{props.name}</button>);
+const Button = (props) => (<button {...props} onClick={props.onClick ? props.onClick : null}
+                                   className={`button ${props.className}`}>{props.name}</button>);
 
 export default Button;
 

@@ -1,0 +1,21 @@
+$search-input-height: 60px;
+$main-interactive-color: #f65261;
+$border-radius: 5px;
+
+.resetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: $search-input-height;
+  padding: 0 4%;
+  border: 2px solid $main-interactive-color;
+  border-radius: $border-radius;
+  background-color: transparent;
+  color: $main-interactive-color;
+  font-size: 20px;
+
+  @media screen and (max-width: 500px) {
+    width: min-content;
+  }
+}

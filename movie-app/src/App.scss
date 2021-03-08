@@ -1,5 +1,9 @@
 @import 'styles/Variables.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   min-height: 100%;
 }
