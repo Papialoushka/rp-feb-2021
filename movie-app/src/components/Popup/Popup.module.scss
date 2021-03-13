@@ -1,0 +1,61 @@
+@import './../../styles/Variables';
+
+.popup {
+  display: block;
+  position: absolute;
+  top: 15px;
+  right: 12px;
+  width: 70%;
+  padding: 27px 0 10px;
+  border-radius: $border-radius;
+  background-color: $main-bg-color;
+
+  ul {
+    flex-direction: column;
+  }
+}
+
+.button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: $main-bg-color;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+
+  &:focus {
+    outline: 1px dashed $content-color;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    font-size: 1rem;
+    line-height: 0;
+    border-radius: 4em;
+    background-color: $content-color;
+    text-indent: 0;
+  }
+
+  &::before {
+    width: 2px;
+    height: 20px;
+  }
+
+  &::after {
+    width: 20px;
+    height: 2px;
+  }
+}

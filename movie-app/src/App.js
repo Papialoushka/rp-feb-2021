@@ -7,7 +7,7 @@ import Button from './components/Button';
 import SearchForm from './components/SearchForm';
 import Navigation from './components/Navigation';
 import FilterMoviesList from './components/FilterMoviesList';
-import SortMoviesList from './components/SortMoviesList';
+import SortMoviesList from './components/SortMovies/SortMoviesList';
 import ErrorBoundary from './components/ErrorBoundary';
 import MoviesList from './components/MoviesList';
 
@@ -28,7 +28,7 @@ const App = () => {
           <SortMoviesList/>
         </div>
         <ErrorBoundary>
-          <MoviesList/>
+          <MoviesList />
         </ErrorBoundary>
       </Main>
       <Footer className='footer'>

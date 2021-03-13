@@ -1,10 +1,10 @@
-import {sortCriteria} from '../data';
+import {sortCriteria} from '../../data';
 import SortMoviesOption from './SortMoviesOption';
-import Button from './Button';
+import Button from '../Button';
 
 const SortMoviesList = () => {
   return (
-    <>
+    <div className='sort-wrapper'>
       <p>Sort by</p>
       <Button className='show-list-button' name={sortCriteria[0]}/>
       <ul role='listbox' className='sort-results'>
@@ -12,7 +12,7 @@ const SortMoviesList = () => {
           <SortMoviesOption criterium={criterium} key={index}/>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
 

@@ -74,4 +74,25 @@
 .sort-results {
   display: none;
   flex-direction: column;
+  width: 100%;
+  max-width: 150px;
+  margin: 0;
+  padding: 0;
+  border-radius: $border-radius;
+  background-color: $tertiary-bg-color;
+
+  li {
+    padding: 15px 20px;
+
+    &:hover,
+    &:focus {
+      background-color: $main-interactive-color;
+    }
+  }
+}
+
+.sort-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
