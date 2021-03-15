@@ -28,6 +28,28 @@
   @media screen and (max-width: 500px) {
     grid-template-columns: repeat(1, 1fr);
   }
+
+  li {
+    .open-popup,
+    div:last-child {
+      display: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .open-popup {
+        display: flex;
+        cursor: pointer;
+      }
+
+      div {
+        &:last-child {
+          display: block;
+        }
+      }
+    }
+  }
 }
 
 .results-filter-wrapper {

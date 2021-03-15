@@ -5,7 +5,10 @@ const movies = [
     'genre': 'documentary',
     'posterPath': '',
     'alt': 'Cool poster',
-    'releaseDate': '1992'
+    'releaseDate': '1992',
+    'duration': '220',
+    'description': 'Lorem ipsum',
+    'rating': '4.3',
   },
   {
     'title': 'Film 2',
@@ -13,7 +16,10 @@ const movies = [
     'genre': 'horror',
     'posterPath': '',
     'alt': 'Cool poster',
-    'releaseDate': '2005'
+    'releaseDate': '2005',
+    'duration': '120',
+    'description': 'Lorem ipsum',
+    'rating': '4.3',
   },
   {
     'title': 'Film 3',
@@ -21,7 +27,10 @@ const movies = [
     'genre': 'comedy',
     'posterPath': '',
     'alt': 'Cool poster',
-    'releaseDate': '2019'
+    'releaseDate': '2019',
+    'duration': '160',
+    'description': 'Lorem ipsum',
+    'rating': '4.3',
   },
   {
     'title': 'Film 4',
@@ -29,7 +38,10 @@ const movies = [
     'genre': 'crime',
     'posterPath': '',
     'alt': 'Cool poster',
-    'releaseDate': '2000'
+    'releaseDate': '2000',
+    'duration': '110',
+    'description': 'Lorem ipsum',
+    'rating': '4.3',
   },
   {
     'title': 'Film 5',
@@ -37,7 +49,10 @@ const movies = [
     'genre': 'documentary',
     'posterPath': '',
     'alt': 'Cool poster',
-    'releaseDate': '1980'
+    'releaseDate': '1980',
+    'duration': '130',
+    'description': 'Lorem ipsum',
+    'rating': '4.3',
   },
   {
     'title': 'Film 6',
@@ -45,9 +60,12 @@ const movies = [
     'genre': 'crime',
     'posterPath': '',
     'alt': 'Cool poster',
-    'releaseDate': '1936'
+    'releaseDate': '1936',
+    'duration': '140',
+    'description': 'Lorem ipsum',
+    'rating': '4.3',
   }
-]
+];
 
 const filterCriteria = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 const sortCriteria = ['Release Date', 'Rating'];
