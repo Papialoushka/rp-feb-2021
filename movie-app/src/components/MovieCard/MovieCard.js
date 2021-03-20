@@ -1,16 +1,19 @@
+import { useCallback } from 'react';
+
 import poster from '../../assets/poster.jpg';
 import '../../styles/MovieCard.scss';
-import Button from '../Button/Button';
 
-const MovieCard = ({...props}) => {
-  const onClick = (e) => props.onClick && props.onClick(e);
+const MovieCard = ({ movie, onActivateMovie, ...props }) => {
+  const onClickMovie = useCallback(() => {
+    onActivateMovie(movie);
+  }, [movie, onActivateMovie]);
 
   return (
     <>
-      <img src={props.movie.posterPath ? props.movie.posterPath : poster} alt={props.movie.alt}/>
-      <h3 onClick={e => onClick(e)}>{props.movie.title}</h3>
-      <p className='release-date'>{props.movie.releaseDate}</p>
-      <p className='genre'>{props.movie.genre}</p>
+      <img onClick={onClickMovie} src={movie.posterPath ? movie.posterPath : poster} alt={movie.alt}/>
+      <h3 onClick={onClickMovie}>{movie.title}</h3>
+      <p className='release-date'>{movie.releaseDate}</p>
+      <p className='genre'>{movie.genre}</p>
       {props.children}
     </>
   );
