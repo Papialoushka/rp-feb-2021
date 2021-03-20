@@ -1,4 +1,4 @@
-import './../styles/SearchInput.scss';
+import '../../styles/SearchInput.scss';
 
 const SearchInput = (props) => <input placeholder={props.placeholder} aria-label={props.ariaLabel} type='search'/>;
 

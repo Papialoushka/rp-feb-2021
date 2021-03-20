@@ -1,12 +1,12 @@
-import MovieCard from './MovieCard';
-import ResultsCount from './ResultsCount';
-import ModalWindow from './ModalWindow/ModalWindow';
-import Button from './Button';
-import Popup from './Popup/Popup';
-import MovieForm from './Form/Form';
-import DeleteForm from './Form/DeleteForm';
-import {useState, useEffect, useCallback, useRef} from 'react';
-import useToggle from './useToggle';
+import MovieCard from '../MovieCard/MovieCard';
+import ResultsCount from '../ResultsCount/ResultsCount';
+import ModalWindow from '../ModalWindow/ModalWindow';
+import Button from '../Button/Button';
+import Popup from '../Popup/Popup';
+import MovieForm from '../Form/Form';
+import DeleteForm from '../Form/DeleteForm';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import useToggle from '../../hooks/useToggle';
 
 const movies = [
   {
@@ -77,13 +77,11 @@ const movies = [
   }
 ];
 
-const MoviesList = (props) => {
+const MoviesList = ({ moviesList = [], showDetail }) => {
   const editOptions = ['edit', 'delete'];
   const [isShownPopup, setIsShownPopup] = useToggle();
   const [isShownModal, setIsShownModal] = useToggle();
   const [modalTitle, setModalTitle] = useState('none');
-
-
 
   const itemRef = useRef(null);
 
@@ -92,27 +90,30 @@ const MoviesList = (props) => {
   }
 
   const deleteMovie = (id) => {
-    setMovies(movies.filter((movie) => movie !== id));
+    setMovies(moviesList.filter((movie) => movie !== id));
   }
 
   return (
     <>
       <h2 className='results-count'>
-        {ResultsCount(movies)}
+        {ResultsCount(moviesList)}
       </h2>
       <ul className='movies-list'>
-        {movies.map((movie) => (
+        {moviesList.map((movie) => (
           <li>
             <MovieCard
               movie={movie}
               key={movie.id}
-              onClick={props.showDetail}
+              onClick={showDetail}
             >
               <Button name='Edit or delete the movie' className='open-popup'
-                      onClick={() => {setIsShownPopup();  moveFocusToPopup();}}/>
+                      onClick={() => {
+                        setIsShownPopup();
+                        moveFocusToPopup();
+                      }}/>
             </MovieCard>
 
-            <Popup {...props} onClick={setIsShownPopup} name='Close edit options'
+            <Popup onClick={setIsShownPopup} name='Close edit options'
                    isShownPopup={isShownPopup}>
               <ul>
                 {editOptions.map((option) => (

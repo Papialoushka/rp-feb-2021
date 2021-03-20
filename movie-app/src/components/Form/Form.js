@@ -1,9 +1,10 @@
 import {Formik, useFormik, Form, useField} from 'formik';
-import {filterCriteria} from './../../data';
-import Button from '../Button';
+import Button from '../Button/Button';
 import primaryButton from './../../styles/PrimaryButton.Module.scss';
 import resetButton from './../../styles/ResetButton.Module.scss';
 import formStyle from './Form.Module.scss'
+
+const filterCriteria = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 
 const TextInput = ({label, ...props}) => {
   const [field, meta] = useField(props);

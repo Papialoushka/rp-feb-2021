@@ -1,4 +1,4 @@
-import './../styles/Main.scss';
+import '../../styles/Main.scss';
 
 const Main = (props) => {
   return (

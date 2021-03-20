@@ -1,6 +1,6 @@
-import poster from './../assets/poster.jpg';
-import './../styles/MovieCard.scss';
-import Button from './Button';
+import poster from '../../assets/poster.jpg';
+import '../../styles/MovieCard.scss';
+import Button from '../Button/Button';
 
 const MovieCard = ({...props}) => {
   const onClick = (e) => props.onClick && props.onClick(e);

@@ -1,4 +1,4 @@
-import Button from '../Button';
+import Button from '../Button/Button';
 import primaryButton from './../../styles/PrimaryButton.Module.scss';
 
 const DeleteForm = (props) => {
