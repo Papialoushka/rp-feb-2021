@@ -1,4 +1,4 @@
-import Button from '../Button';
+import Button from '../Button/Button';
 import style from './Popup.module.scss';
 
 const Popup = (props) => {

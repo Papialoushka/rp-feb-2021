@@ -1,17 +1,26 @@
 import './App.scss';
-import Logo from './components/Logo';
-import Header from './components/header';
-import Main from './components/main';
-import Footer from './components/footer';
-import Button from './components/Button';
-import SearchForm from './components/SearchForm';
-import Navigation from './components/Navigation';
-import FilterMoviesList from './components/FilterMoviesList';
-import SortMoviesList from './components/SortMovies/SortMoviesList';
-import ErrorBoundary from './components/ErrorBoundary';
-import MoviesList from './components/MoviesList';
-import MovieDetail from './components/MovieDetail/MovieDetail';
-import useToggle from './components/useToggle';
+
+import React, { useState, useEffect, useCallback } from 'react';
+import useToggle from '../../hooks/useToggle';
+
+import Logo from '../Logo';
+import Button from '../Button';
+import Navigation from '../Navigation';
+
+import Header from '../Header';
+import Main from '../Main';
+import Footer from '../Footer';
+
+import SearchForm from '../SearchForm';
+
+import MovieDetail from '../MovieDetail';
+import MoviesList from '../MoviesList';
+import FilterMoviesList from '../FilterMovies';
+import SortMoviesList from '../SortMovies';
+
+import ErrorBoundary from '../ErrorBoundary';
+
+import data from './data';
 
 const targetMovie = {
   'title': 'Film 1',
@@ -26,7 +35,12 @@ const targetMovie = {
 }
 
 const App = () => {
+  const [moviesList, setMoviesList] = useState([]);
   const [isDetailShown, setIsDetailShown] = useToggle();
+
+  useEffect(() => {
+    setMoviesList([...data.movies]);
+  }, []);
 
   return (
     <>
@@ -56,7 +70,8 @@ const App = () => {
           <SortMoviesList/>
         </div>
         <ErrorBoundary>
-          <MoviesList showDetail={setIsDetailShown}/>
+          <MoviesList moviesList={moviesList}
+                      showDetail={setIsDetailShown}/>
         </ErrorBoundary>
       </Main>
       <Footer className='footer'>

@@ -1,4 +1,4 @@
-import Button from '../Button';
+import Button from '../Button/Button';
 import style from './ModalWindow.module.scss';
 
 const ModalWindow = (props) => {

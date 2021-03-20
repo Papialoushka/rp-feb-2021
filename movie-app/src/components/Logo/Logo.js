@@ -1,4 +1,4 @@
-import logo from './../assets/logo.png';
+import logo from '../../assets/logo.png';
 
 const Logo = (props) => <img src={logo} alt={props.altText} className={props.className} />;
 

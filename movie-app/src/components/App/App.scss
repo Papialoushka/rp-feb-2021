@@ -1,4 +1,4 @@
-@import 'styles/Variables.scss';
+@import '../../styles/Variables';
 
 * {
   box-sizing: border-box;
@@ -54,7 +54,7 @@ body,
   display: block;
   width: 50px;
   height: 50px;
-  background: transparent url('./assets/search-icon.png') no-repeat center;
+  background: transparent url('../../assets/search-icon.png') no-repeat center;
   background-size: 70%;
   overflow: hidden;
   white-space: nowrap;

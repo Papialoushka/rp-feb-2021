@@ -1,6 +1,7 @@
-import {sortCriteria} from '../../data';
 import SortMoviesOption from './SortMoviesOption';
-import Button from '../Button';
+import Button from '../Button/Button';
+
+const sortCriteria = ['Release Date', 'Rating'];
 
 const SortMoviesList = () => {
   return (

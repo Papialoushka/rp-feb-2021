@@ -1,5 +1,6 @@
-import { filterCriteria } from '../data';
 import FilterMoviesLink from './FilterMoviesLink';
+
+const filterCriteria = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 
 const FilterMoviesList = () => {
   return (
