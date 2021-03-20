@@ -10,15 +10,43 @@ import FilterMoviesList from './components/FilterMoviesList';
 import SortMoviesList from './components/SortMovies/SortMoviesList';
 import ErrorBoundary from './components/ErrorBoundary';
 import MoviesList from './components/MoviesList';
+import MovieDetail from './components/MovieDetail/MovieDetail';
+import useToggle from './components/useToggle';
+
+const targetMovie = {
+  'title': 'Film 1',
+  'id': 'film1',
+  'genre': 'documentary',
+  'posterPath': '',
+  'alt': 'Cool poster',
+  'releaseDate': '1992',
+  'duration': '220',
+  'description': 'Lorem ipsum',
+  'rating': '4.3',
+}
 
 const App = () => {
+  const [isDetailShown, setIsDetailShown] = useToggle();
+
   return (
     <>
       <Header>
-        <Logo className='header-logo' altText='Netflix movies logo'/>
-        <Button className='add-button' name='Add movie'/>
-        <h1>Find your movie</h1>
-        <SearchForm/>
+        {!isDetailShown ? (
+          <>
+            <Logo className='header-logo' altText='Netflix movies logo'/>
+            <Button className='add-button' name='Add movie'/>
+            <h1>Find your movie</h1>
+            <SearchForm/>
+          </>
+        ) : (
+          <>
+            <div className='header-top-row'>
+              <Logo className='header-logo' altText='Netflix movies logo'/>
+              <a className='search-link' href='#' onClick={setIsDetailShown}>Go to Home page</a>
+            </div>
+            <MovieDetail movie={targetMovie} isDetailShown={isDetailShown}/>
+          </>
+        )}
       </Header>
       <Main>
         <div className='results-filter-wrapper'>
@@ -28,7 +56,7 @@ const App = () => {
           <SortMoviesList/>
         </div>
         <ErrorBoundary>
-          <MoviesList />
+          <MoviesList showDetail={setIsDetailShown}/>
         </ErrorBoundary>
       </Main>
       <Footer className='footer'>

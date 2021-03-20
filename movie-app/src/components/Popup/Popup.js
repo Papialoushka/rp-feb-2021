@@ -1,28 +1,20 @@
 import Button from '../Button';
 import style from './Popup.module.scss';
 
-class Popup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-  }
+const Popup = (props) => {
+  const onClick = (e) => props.onClick && props.onClick(e);
 
-  onClick(e) {
-    this.props.onClick && this.props.onClick(e);
-  };
-
-  render() {
-    if (!this.props.isShownPopup) {
-      return null;
-    }
+  if (!props.isShownPopup) {
+    return null;
+  } else {
     return (
       <div className={style.popup}>
-        {this.props.children}
-        <Button onClick={e => this.onClick(e)} className={style.button} name={this.props.name} />
+        {props.children}
+        <Button onClick={e => onClick(e)} className={style.button} name={props.name} />
       </div>
     );
   }
-}
+};
 
 export default Popup;
 

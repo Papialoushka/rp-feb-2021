@@ -1,0 +1,43 @@
+@import './../../styles/Variables';
+
+.detailWrapper {
+  display: block;
+  width: 100%;
+  padding: 2vh 0;
+
+  img {
+    float: left;
+    margin-right: 2vw;
+  }
+
+  p {
+    margin-bottom: 2em;
+    font-size: 14px;
+  }
+}
+
+.dateDurationWrapper {
+  display: flex;
+
+  span {
+    color: $main-interactive-color;
+    font-size: 18px;
+
+    &:not(:first-child) {
+      margin-left: 2vw;
+    }
+  }
+}
+
+.rating {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 2em;
+  border: 1px solid $tertiary-bg-color;
+  border-radius: 50%;
+  color: lightgreen;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+}
