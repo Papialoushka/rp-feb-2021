@@ -1,7 +1,6 @@
 import './App.scss';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import useToggle from '../../hooks/useToggle';
 
 import Logo from '../Logo';
 import Button from '../Button';
@@ -22,30 +21,32 @@ import ErrorBoundary from '../ErrorBoundary';
 
 import data from './data';
 
-const targetMovie = {
-  'title': 'Film 1',
-  'id': 'film1',
-  'genre': 'documentary',
-  'posterPath': '',
-  'alt': 'Cool poster',
-  'releaseDate': '1992',
-  'duration': '220',
-  'description': 'Lorem ipsum',
-  'rating': '4.3',
-}
-
 const App = () => {
   const [moviesList, setMoviesList] = useState([]);
-  const [isDetailShown, setIsDetailShown] = useToggle();
+  const [movieDetailActive, setMovieDetailActive] = useState(null);
+  const [sortCriterion, setSortCriterion] = useState('release date');
 
   useEffect(() => {
     setMoviesList([...data.movies]);
   }, []);
 
+  const onActivateMovie = useCallback((movie) => {
+    setMovieDetailActive(movie);
+    document.documentElement.scrollTop = 0;
+  });
+
+  const deactivateMovie = useCallback(() => {
+    setMovieDetailActive(null);
+  }, []);
+
+  const onSortMovies = useCallback((sortCriterion) => {
+    setSortCriterion(sortCriterion);
+  }, []);
+
   return (
     <>
       <Header>
-        {!isDetailShown ? (
+        {!movieDetailActive ? (
           <>
             <Logo className='header-logo' altText='Netflix movies logo'/>
             <Button className='add-button' name='Add movie'/>
@@ -56,9 +57,9 @@ const App = () => {
           <>
             <div className='header-top-row'>
               <Logo className='header-logo' altText='Netflix movies logo'/>
-              <a className='search-link' href='#' onClick={setIsDetailShown}>Go to Home page</a>
+              <a className='search-link' href='#' onClick={deactivateMovie}>Go to Home page</a>
             </div>
-            <MovieDetail movie={targetMovie} isDetailShown={isDetailShown}/>
+            <MovieDetail movie={movieDetailActive}/>
           </>
         )}
       </Header>
@@ -67,11 +68,13 @@ const App = () => {
           <Navigation className='filter-results' ariaLabel='Filter movies criteria'>
             <FilterMoviesList/>
           </Navigation>
-          <SortMoviesList/>
+          <SortMoviesList
+            sortCriterion={sortCriterion}
+            onSortMovies={onSortMovies}/>
         </div>
         <ErrorBoundary>
           <MoviesList moviesList={moviesList}
-                      showDetail={setIsDetailShown}/>
+                      onActivateMovie={onActivateMovie}/>
         </ErrorBoundary>
       </Main>
       <Footer className='footer'>

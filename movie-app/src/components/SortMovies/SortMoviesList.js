@@ -3,14 +3,14 @@ import Button from '../Button/Button';
 
 const sortCriteria = ['Release Date', 'Rating'];
 
-const SortMoviesList = () => {
+const SortMoviesList = ({sortCriterion, onSortMovies}) => {
   return (
     <div className='sort-wrapper'>
       <p>Sort by</p>
-      <Button className='show-list-button' name={sortCriteria[0]}/>
+      <Button className='show-list-button' name={sortCriterion}/>
       <ul role='listbox' className='sort-results'>
-        {sortCriteria.map((criterium, index) => (
-          <SortMoviesOption criterium={criterium} key={index}/>
+        {sortCriteria.map((criterion, index) => (
+          <SortMoviesOption criterium={criterion} key={index}/>
         ))}
       </ul>
     </div>
