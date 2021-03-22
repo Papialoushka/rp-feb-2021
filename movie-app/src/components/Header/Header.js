@@ -7,7 +7,3 @@ const Header = (props) => {
 }
 
 export default Header;
-
-Header.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-};

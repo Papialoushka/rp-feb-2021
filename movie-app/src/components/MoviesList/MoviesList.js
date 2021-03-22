@@ -1,3 +1,7 @@
+import { useState, useEffect, useCallback, useRef } from 'react';
+
+import { v4 as uuidv4 } from 'uuid';
+
 import MovieCard from '../MovieCard/MovieCard';
 import ResultsCount from '../ResultsCount/ResultsCount';
 import ModalWindow from '../ModalWindow/ModalWindow';
@@ -5,19 +9,15 @@ import Button from '../Button/Button';
 import Popup from '../Popup/Popup';
 import MovieForm from '../Form/Form';
 import DeleteForm from '../Form/DeleteForm';
-import { useState, useEffect, useCallback, useRef } from 'react';
 import useToggle from '../../hooks/useToggle';
 
 const MoviesList = ({ moviesList = [], showDetail, onActivateMovie }) => {
   const [isShownPopup, setIsShownPopup] = useToggle();
   const [isShownModal, setIsShownModal] = useToggle();
   const [modalTitle, setModalTitle] = useState('none');
+  const [movieToTarget, setMovieToTarget] = useState(null);
 
   const editOptions = ['edit', 'delete'];
-
-  const onDeleteMovie = (id) => {
-    setMovies(moviesList.filter((movie) => movie !== id));
-  }
 
   return (
     <>
@@ -26,33 +26,34 @@ const MoviesList = ({ moviesList = [], showDetail, onActivateMovie }) => {
       </h2>
       <ul className='movies-list'>
         {moviesList.map((movie) => (
-          <li>
+          <li key={uuidv4()}>
             <MovieCard
               movie={movie}
               key={movie.id}
               onActivateMovie={onActivateMovie}
+              genres={movie.genres}
             >
               <Button name='Edit or delete the movie' className='open-popup'
                       onClick={() => {
                         setIsShownPopup();
-                        moveFocusToPopup();
                       }}/>
-            </MovieCard>
 
-            <Popup onClick={setIsShownPopup} name='Close edit options'
-                   isShownPopup={isShownPopup}>
-              <ul>
-                {editOptions.map((option) => (
-                  <li>
-                    <Button name={option} className='open-modal' id={option}
-                            onClick={() => {
-                              setIsShownModal();
-                              setModalTitle(option);
-                            }}/>
-                  </li>
-                ))}
-              </ul>
-            </Popup>
+              <Popup onClick={setIsShownPopup} name='Close edit options'
+                     isShownPopup={isShownPopup}>
+                <ul>
+                  {editOptions.map((option) => (
+                    <li key={uuidv4()}>
+                      <Button name={option} className='open-modal' id={option}
+                              onClick={() => {
+                                setIsShownModal();
+                                setModalTitle(option);
+                                setMovieToTarget(movie);
+                              }}/>
+                    </li>
+                  ))}
+                </ul>
+              </Popup>
+            </MovieCard>
           </li>
         ))}
       </ul>
@@ -60,8 +61,8 @@ const MoviesList = ({ moviesList = [], showDetail, onActivateMovie }) => {
         <h2>
           {modalTitle} movie
         </h2>
-        <MovieForm modalTitle={modalTitle}/>
-        <DeleteForm modalTitle={modalTitle}/>
+        <MovieForm modalTitle={modalTitle} movie={movieToTarget} />
+        <DeleteForm modalTitle={modalTitle} movie={movieToTarget} />
       </ModalWindow>
     </>
   );

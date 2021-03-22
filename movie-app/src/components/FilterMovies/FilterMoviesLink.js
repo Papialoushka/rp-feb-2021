@@ -1,4 +1,4 @@
-const FilterMoviesLink = (props) => <a>{props.genre}</a>;
+const FilterMoviesLink = (props) => <a onClick={props.onGenresClick}>{props.genre}</a>;
 
 export default FilterMoviesLink;
 

@@ -1,7 +1,7 @@
 {
   "presets": [
-    ["@babel/preset-env", {"targets": "defaults"}],
+    ["@babel/preset-env", {"targets": "defaults", "useBuiltIns": "entry"}],
     "@babel/preset-react"
   ],
-  "plugins": ["@babel/plugin-transform-react-jsx-source"]
+  "plugins": ["@babel/plugin-transform-react-jsx-source", "@babel/plugin-transform-runtime"]
 }
