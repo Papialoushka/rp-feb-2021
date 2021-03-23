@@ -1,12 +1,16 @@
-import {Formik, useFormik, Form, useField} from 'formik';
+import { Formik, useFormik, Form, useField } from 'formik';
+import { useState, useCallback } from 'react';
+import { connect } from 'react-redux';
+
 import Button from '../Button/Button';
 import primaryButton from './../../styles/PrimaryButton.Module.scss';
 import resetButton from './../../styles/ResetButton.Module.scss';
 import formStyle from './Form.Module.scss'
+import { addMovie, editMovie } from '../../redux/actions';
 
 const filterCriteria = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 
-const TextInput = ({label, ...props}) => {
+const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
@@ -19,7 +23,7 @@ const TextInput = ({label, ...props}) => {
   );
 };
 
-const Select = ({label, ...props}) => {
+const Select = ({ label, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
@@ -32,7 +36,7 @@ const Select = ({label, ...props}) => {
   );
 };
 
-const MovieForm = (props) => {
+const MovieForm = ({ movie = '', ...props }) => {
   if (props.modalTitle === 'delete') {
     return null;
   }
@@ -41,26 +45,23 @@ const MovieForm = (props) => {
     <>
       <Formik
         initialValues={{
-          movieId: '',
-          title: '',
-          releaseDate: '',
-          movieUrl: '',
-          genre: '',
-          overview: '',
-          runtime: '',
+          id: movie.id || '',
+          title: movie.title || '',
+          releaseDate: new Date(movie.release_date).toLocaleString() || '',
+          genre: movie.genre || '',
+          overview: movie.overview || '',
+          runtime: movie.runtime || '',
+          url: movie.url || '',
         }}
-        onSubmit={(values, {setSubmitting}) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(values, { setSubmitting }) => {
+          const choseSubmit = movie ? props.editMovie(values) : props.addMovie(values);
         }}
       >
         <Form className={formStyle.form}>
           <TextInput
             className={formStyle.disabled}
             label='Movie ID'
-            name='movieId'
+            name='id'
             type='text'
             disabled
           />
@@ -84,13 +85,13 @@ const MovieForm = (props) => {
           <TextInput
             className={formStyle.input}
             label='Movie URL'
-            name='movieUrl'
+            name='url'
             type='url'
             placeholder='e.g. moana.com'
           />
 
           <Select label='Genre' name='genre' className={formStyle.select}>
-            <option value=''>Select Genre</option>
+            <option value={movie.genre || ''}>{movie.genre || 'Select Genre'}</option>
             {filterCriteria.map((criterium, index) => (
               <option key={index}>
                 {criterium}
@@ -124,4 +125,12 @@ const MovieForm = (props) => {
   );
 };
 
-export default MovieForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMovie: (values) => dispatch(addMovie(values)),
+    editMovie: (values) => dispatch(editMovie(values))
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(MovieForm);

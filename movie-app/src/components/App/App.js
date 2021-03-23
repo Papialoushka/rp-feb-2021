@@ -1,6 +1,7 @@
 import './App.scss';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { connect, useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import Logo from '../Logo';
 import Button from '../Button';
@@ -14,21 +15,27 @@ import SearchForm from '../SearchForm';
 
 import MovieDetail from '../MovieDetail';
 import MoviesList from '../MoviesList';
+
 import FilterMoviesList from '../FilterMovies';
 import SortMoviesList from '../SortMovies';
 
 import ErrorBoundary from '../ErrorBoundary';
 
-import data from './data';
+import { getMovies, getGenres } from '../../redux/actions';
+import ModalWindow from '../ModalWindow';
+import MovieForm from '../Form/Form';
+import useToggle from '../../hooks/useToggle';
 
-const App = () => {
+const App = ({ ...props }) => {
   const [moviesList, setMoviesList] = useState([]);
+  const [moviesGenres, setMoviesGenres] = useState([]);
   const [movieDetailActive, setMovieDetailActive] = useState(null);
-  const [sortCriterion, setSortCriterion] = useState('release date');
+  const [isShownModal, setIsShownModal] = useToggle();
+  const [modalTitle, setModalTitle] = useState('none');
 
   useEffect(() => {
-    setMoviesList([...data.movies]);
-  }, []);
+    setMoviesList([...props.movies]);
+  }, [...props.movies]);
 
   const onActivateMovie = useCallback((movie) => {
     setMovieDetailActive(movie);
@@ -39,17 +46,16 @@ const App = () => {
     setMovieDetailActive(null);
   }, []);
 
-  const onSortMovies = useCallback((sortCriterion) => {
-    setSortCriterion(sortCriterion);
-  }, []);
-
   return (
     <>
       <Header>
         {!movieDetailActive ? (
           <>
             <Logo className='header-logo' altText='Netflix movies logo'/>
-            <Button className='add-button' name='Add movie'/>
+            <Button className='add-button' name='Add movie' onClick={() => {
+              setIsShownModal();
+              setModalTitle('add');
+            }}/>
             <h1>Find your movie</h1>
             <SearchForm/>
           </>
@@ -66,11 +72,9 @@ const App = () => {
       <Main>
         <div className='results-filter-wrapper'>
           <Navigation className='filter-results' ariaLabel='Filter movies criteria'>
-            <FilterMoviesList/>
+            <FilterMoviesList />
           </Navigation>
-          <SortMoviesList
-            sortCriterion={sortCriterion}
-            onSortMovies={onSortMovies}/>
+          <SortMoviesList />
         </div>
         <ErrorBoundary>
           <MoviesList moviesList={moviesList}
@@ -80,8 +84,30 @@ const App = () => {
       <Footer className='footer'>
         <Logo className='footer-logo' altText='Netflix roulette logo'/>
       </Footer>
+      <ModalWindow onClick={() => {
+        setIsShownModal();
+        setMoviesList([...props.movies]);
+      }} show={isShownModal}>
+        <h2>
+          {modalTitle} movie
+        </h2>
+        <MovieForm modalTitle={modalTitle}/>
+      </ModalWindow>
     </>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMovies: () => dispatch(getMovies()),
+    getGenres: () => dispatch(getGenres()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

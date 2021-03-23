@@ -23,15 +23,15 @@ const MovieDetail = ({ movie, ...props }) => {
     return (
       <div className={detailStyle.detailWrapper}>
         <img src={movie.posterPath ? movie.posterPath : poster} alt={movie.alt}/>
-        <h1 aria-label={`${movie.title} rated ${movie.rating}`}>{movie.title}
-          <span className={detailStyle.rating} aria-hidden='true'>{movie.rating}</span>
+        <h1 aria-label={`${movie.title} rated ${movie.vote_average}`}>{movie.title}
+          <span className={detailStyle.rating} aria-hidden='true'>{movie.vote_average}</span>
         </h1>
         <p className='genre'>{movie.genre}</p>
         <p className={detailStyle.dateDurationWrapper}>
-          <span>{movie.releaseDate}</span>
-          <span>{movie.duration}</span>
+          <span>{new Date(movie.release_date).getFullYear()}</span>
+          <span>{movie.runtime}</span>
         </p>
-        <p className='description'>{movie.description}</p>
+        <p className='description'>{movie.overview}</p>
         {props.children}
       </div>
     );
