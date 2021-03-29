@@ -3,8 +3,9 @@ import {useEffect, useState} from 'react';
 import poster from '../../assets/poster.jpg';
 import detailStyle from './MovieDetail.Module.scss';
 
+const defaultDocumentTitle = document.title;
+
 const MovieDetail = ({ movie, ...props }) => {
-  const defaultDocumentTitle = document.title;
   const [documentTitle, setDocumentTitle] = useState(defaultDocumentTitle);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const MovieDetail = ({ movie, ...props }) => {
     return () => {
       document.title = defaultDocumentTitle;
     }
-  });
+  }, [documentTitle, setDocumentTitle]);
 
   if (!movie) {
     return null;

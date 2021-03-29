@@ -2,22 +2,22 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import MovieCard from '../MovieCard/MovieCard';
-import ResultsCount from '../ResultsCount/ResultsCount';
-import ModalWindow from '../ModalWindow/ModalWindow';
+import { MovieCard } from '../MovieCard';
+import { ResultsCount } from '../ResultsCount';
+import { ModalWindow } from '../ModalWindow';
 import Button from '../Button/Button';
 import Popup from '../Popup/Popup';
 import MovieForm from '../Form/Form';
-import DeleteForm from '../Form/DeleteForm';
+import { DeleteForm } from '../Form';
 import useToggle from '../../hooks/useToggle';
+
+const editOptions = ['edit', 'delete'];
 
 const MoviesList = ({ moviesList = [], showDetail, onActivateMovie }) => {
   const [isShownPopup, setIsShownPopup] = useToggle();
   const [isShownModal, setIsShownModal] = useToggle();
   const [modalTitle, setModalTitle] = useState('none');
   const [movieToTarget, setMovieToTarget] = useState(null);
-
-  const editOptions = ['edit', 'delete'];
 
   return (
     <>
@@ -42,7 +42,7 @@ const MoviesList = ({ moviesList = [], showDetail, onActivateMovie }) => {
                      isShownPopup={isShownPopup}>
                 <ul>
                   {editOptions.map((option) => (
-                    <li key={uuidv4()}>
+                    <li key={option}>
                       <Button name={option} className='open-modal' id={option}
                               onClick={() => {
                                 setIsShownModal();
@@ -57,13 +57,21 @@ const MoviesList = ({ moviesList = [], showDetail, onActivateMovie }) => {
           </li>
         ))}
       </ul>
-      <ModalWindow onClick={setIsShownModal} show={isShownModal}>
-        <h2>
-          {modalTitle} movie
-        </h2>
-        <MovieForm modalTitle={modalTitle} movie={movieToTarget} />
-        <DeleteForm modalTitle={modalTitle} movie={movieToTarget} />
-      </ModalWindow>
+      <>
+        {
+          (isShownModal) && <ModalWindow onShow={setIsShownModal}>
+            <h2>
+              {modalTitle} movie
+            </h2>
+            <>
+              {
+                (modalTitle === 'delete') ? <DeleteForm modalTitle={modalTitle} movie={movieToTarget}/> :
+                  <MovieForm movie={movieToTarget}/>
+              }
+            </>
+          </ModalWindow>
+        }
+      </>
     </>
   );
 }

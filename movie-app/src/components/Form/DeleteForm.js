@@ -1,30 +1,20 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import Button from '../Button/Button';
 import primaryButton from './../../styles/PrimaryButton.Module.scss';
-import { deleteMovie, getGenres } from '../../redux/actions';
+import { deleteMovie } from '../../redux/reducers';
 
 const DeleteForm = ({ movie, ...props }) => {
-  if (!(props.modalTitle === 'delete')) {
-    return null;
-  }
-  else {
-    return (
-      <>
-        <p>
-          Are you sure you want to delete this movie?
-        </p>
-        <Button className={primaryButton.primaryButton} name='Confirm' onClick={() => props.deleteMovie(movie)} />
-      </>
-    );
-  }
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      <p>
+        Are you sure you want to delete this movie?
+      </p>
+      <Button className={primaryButton.primaryButton} name='Confirm'
+              onClick={() => dispatch(deleteMovie(movie.id))}/>
+    </>
+  );
 };
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteMovie: (movie) => dispatch(deleteMovie(movie)),
-  }
-}
-
-
-export default connect(null, mapDispatchToProps)(DeleteForm);
+export { DeleteForm };

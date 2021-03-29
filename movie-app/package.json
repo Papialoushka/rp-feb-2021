@@ -47,6 +47,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.21.1",
+    "date-fns": "^2.19.0",
     "formik": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -58,7 +59,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   },
   "jest": {
     "transform": {},

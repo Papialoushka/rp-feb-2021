@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useState, useCallback } from 'react';
 
 import FilterMoviesLink from './FilterMoviesLink';
-import { getGenres, getMovies } from '../../redux/actions';
 import { fetchMoviesByGenres, fetchMovies } from '../../redux/reducers';
 
 const filterCriteria = ['all', 'documentary', 'comedy', 'horror', 'crime'];

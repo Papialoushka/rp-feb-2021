@@ -22,13 +22,12 @@ import SortMoviesList from '../SortMovies';
 import ErrorBoundary from '../ErrorBoundary';
 
 import { getMovies, getGenres } from '../../redux/actions';
-import ModalWindow from '../ModalWindow';
+import { ModalWindow } from '../ModalWindow';
 import MovieForm from '../Form/Form';
 import useToggle from '../../hooks/useToggle';
 
 const App = ({ ...props }) => {
   const [moviesList, setMoviesList] = useState([]);
-  const [moviesGenres, setMoviesGenres] = useState([]);
   const [movieDetailActive, setMovieDetailActive] = useState(null);
   const [isShownModal, setIsShownModal] = useToggle();
   const [modalTitle, setModalTitle] = useState('none');
@@ -72,9 +71,9 @@ const App = ({ ...props }) => {
       <Main>
         <div className='results-filter-wrapper'>
           <Navigation className='filter-results' ariaLabel='Filter movies criteria'>
-            <FilterMoviesList />
+            <FilterMoviesList/>
           </Navigation>
-          <SortMoviesList />
+          <SortMoviesList/>
         </div>
         <ErrorBoundary>
           <MoviesList moviesList={moviesList}
@@ -84,15 +83,19 @@ const App = ({ ...props }) => {
       <Footer className='footer'>
         <Logo className='footer-logo' altText='Netflix roulette logo'/>
       </Footer>
-      <ModalWindow onClick={() => {
-        setIsShownModal();
-        setMoviesList([...props.movies]);
-      }} show={isShownModal}>
-        <h2>
-          {modalTitle} movie
-        </h2>
-        <MovieForm modalTitle={modalTitle}/>
-      </ModalWindow>
+      <>
+        {
+          (isShownModal) && <ModalWindow onShow={() => {
+            setIsShownModal();
+            setMoviesList([...props.movies]);
+          }}>
+            <h2>
+              {modalTitle} movie
+            </h2>
+            <MovieForm/>
+          </ModalWindow>
+        }
+      </>
     </>
   );
 };
