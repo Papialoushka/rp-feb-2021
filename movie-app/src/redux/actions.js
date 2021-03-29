@@ -4,22 +4,6 @@ export const getMovies = () => {
   }
 }
 
-export const addMovie = (movie) => {
-  return {
-    type: 'ADD_MOVIE',
-    payload: {
-      'title': movie.title,
-      'id': movie.id,
-      'genre': movie.genre,
-      'url': movie.url,
-      'release_date': movie.releaseDate,
-      'runtime': movie.runtime,
-      'overview': movie.overview,
-      'vote_average': movie.vote_average,
-    }
-  }
-}
-
 export const editMovie = (values) => {
   return {
     type: 'EDIT_MOVIE',
@@ -46,3 +30,5 @@ export const getGenres = () => {
     type: 'GET_GENRES',
   }
 }
+
+export const ADD_MOVIE = 'ADD_MOVIE';

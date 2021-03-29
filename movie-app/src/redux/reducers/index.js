@@ -7,12 +7,6 @@ export default (state, action) => {
         movies: [...state.movies],
       }
 
-    case 'ADD_MOVIE':
-      return {
-        ...state,
-        movies: [...state.movies, action.payload],
-      }
-
     case 'EDIT_MOVIE':
       const {
         title,
@@ -47,7 +41,7 @@ export default (state, action) => {
 
     case 'DELETE_MOVIE':
       return {
-        movies: [...state.movies.filter(movie => movie.id !== action.payload.id)],
+        movies: [...state.movies.filter(movie => movie.id !== action.payload)],
       }
 
     case 'GET_GENRES':
@@ -59,7 +53,8 @@ export default (state, action) => {
 
     case 'FILTER_MOVIE':
       return {
-        movies: [...state.movies.map(movie => movie.genres.filter(genre => genre === action.payload))],
+        // movies: [...state.movies.map(movie => movie.genres.filter(genre => genre === action.payload))],
+        movies: [...state.movies],
       }
 
     case 'LOAD_MOVIES':
@@ -90,5 +85,23 @@ export function fetchMoviesByGenres(genre) {
     const response = await moviesAPI.getClientMovies({filter: genre});
 
     dispatch({ type: 'LOAD_MOVIES_BY_GENRES', payload: response.data });
+  }
+}
+
+export function deleteMovie(id) {
+  return async function deleteMovieThunk(dispatch, getState) {
+    const response = await moviesAPI.deleteClientMovie({ id: id });
+
+    dispatch({ type: 'DELETE_MOVIE' });
+  }
+}
+
+export function addMovie(movie) {
+  return async function addMovieThunk(dispatch, getState) {
+    const request = await moviesAPI.addClientMovie(movie);
+
+    console.log(movie);
+
+    dispatch({ type: 'ADD_MOVIE' });
   }
 }

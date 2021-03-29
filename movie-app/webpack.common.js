@@ -34,12 +34,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(jsx|js)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            // presets: [
+            //   ["@babel/preset-env", {"targets": "defaults", "useBuiltIns": "entry"}],
+            //   'react'
+            // ],
             cacheDirectory: true,
           }
         }

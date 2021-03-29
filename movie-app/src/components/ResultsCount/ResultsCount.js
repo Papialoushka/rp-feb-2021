@@ -1,4 +1,4 @@
-const ResultsCount = (arr) => {
+export const ResultsCount = (arr) => {
   return (
     <>
       {!arr.length  ? 'No movies found' :
@@ -7,5 +7,3 @@ const ResultsCount = (arr) => {
     </>
   )
 }
-
-export default ResultsCount;

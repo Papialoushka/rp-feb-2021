@@ -8,15 +8,35 @@ const MovieCard = ({ movie, onActivateMovie, genres, ...props }) => {
     onActivateMovie(movie);
   }, [movie, onActivateMovie]);
 
+  const getDate = useCallback((date) => {
+    return new Date(date).getFullYear();
+  }, []);
+
   return (
     <>
       <img onClick={onClickMovie} src={movie.posterPath ? movie.posterPath : poster} alt={movie.alt}/>
       <h3 onClick={onClickMovie}>{movie.title}</h3>
-      <p className='release-date'>{new Date(movie.release_date).getFullYear()}</p>
-      <p className='genre'>{genres}</p>
+      <p className='release-date'>{getDate(movie.release_date)}</p>
+      <p className='genre'>
+        {
+          genres.map(genre => (
+            <span>
+              {genre}
+            </span>
+          ))
+        }
+      </p>
       {props.children}
     </>
   );
 }
 
-export default MovieCard;
+MovieCard.propTypes = {
+  movie: PropTypes.object.isRequired,
+  genres: PropTypes.array.isRequired,
+  onActivateMovie: PropTypes.func.isRequired,
+}
+
+export {
+  MovieCard
+};
